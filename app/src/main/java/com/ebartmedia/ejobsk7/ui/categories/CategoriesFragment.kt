@@ -62,7 +62,7 @@ class CategoriesFragment : Fragment() {
             categories.add(Categories("lkajsdf"))
             categories.add(Categories("lkajsdf"))
 
-            val adapter = CustomAdapter(categories)
+          //  val adapter = CustomAdapter(categories,)
 
            // recyclerView.adapter = adapter
 
