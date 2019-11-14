@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.net.Uri
 import android.os.Bundle
-import android.view.Gravity
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import androidx.navigation.findNavController
@@ -18,8 +17,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.CursorAdapter
-import android.widget.LinearLayout
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.FragmentTransaction
@@ -28,18 +25,22 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ebartmedia.ejobsk7.adapter.AnimalAdapter
 import com.ebartmedia.ejobsk7.adapter.CustomAdapter
 import com.ebartmedia.ejobsk7.model.Categories
-import com.ebartmedia.ejobsk7.ui.antoher.AnotherFragment
+import com.ebartmedia.ejobsk7.ui.another.AnotherFragment
 import com.ebartmedia.ejobsk7.ui.categories.CategoriesFragment
+import com.ebartmedia.ejobsk7.ui.categoriess.CategoriessFragment
 import com.ebartmedia.ejobsk7.ui.home.HomeFragment
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.content_main.*
-import kotlinx.android.synthetic.main.list_layout.*
 
 //class MainActivity : AppCompatActivity() {
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, CategoriesFragment.OnFragmentInteractionListener, AnotherFragment.OnFragmentInteractionListener {
 
     // val categoriesFragment = CategoriesFragment
+
+    lateinit var categoriesFragment: CategoriesFragment
+    lateinit var categoriessFragment: CategoriessFragment
+    lateinit var anotherFragment: AnotherFragment
 
     val animals: ArrayList<String> = ArrayList()
 
@@ -82,36 +83,36 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
 
 
-            val recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
+           // val recyclerView = findViewById<RecyclerView>(R.id.recyclerView) //here
 
       //  recyclerView.layoutManager = LinearLayoutManager(this, LinearLayout.VERTICAL, false)
 
 
 
-        recyclerView.adapter = AnimalAdapter(animals, this)
+      //  recyclerView.adapter = AnimalAdapter(animals, this) //here
 
       //  val recyclerView = findViewById<RecyclerView>(R.id.recyclerView) as RecyclerView
 
        // recyclerView.layoutManager = LinearLayoutManager(this, LinearLayout.VERTICAL, false)
       //  recyclerView.layoutManager = LinearLayoutManager(this.applicationContext)
 
-        val categories = ArrayList<Categories>()
-
-        categories.add(Categories("ssssss"))
-        categories.add(Categories("fasdfasdf"))
-        categories.add(Categories("ddddddd"))
-        categories.add(Categories("asdfasdfas"))
-        categories.add(Categories("aaaaaa"))
-        categories.add(Categories("sdfsdfsdf"))
+//        val categories = ArrayList<Categories>() //here
+//
+//        categories.add(Categories("ssssss"))
+//        categories.add(Categories("fasdfasdf"))
+//        categories.add(Categories("ddddddd"))
+//        categories.add(Categories("asdfasdfas"))
+//        categories.add(Categories("aaaaaa"))
+//        categories.add(Categories("sdfsdfsdf"))
 
 //        for (i in 0..categories.size - 1) {
 //
 //            categories.add(Categories(catName = [i].toString()))
 //        }
 
-        val adapter = CustomAdapter(categories)
-
-        recyclerView.adapter = adapter
+//        val adapter = CustomAdapter(categories) //here
+//
+//        recyclerView.adapter = adapter //here
 
         init()
     }
@@ -199,7 +200,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         supportFragmentManager
             .beginTransaction()
           //  .replace(R.id.nav_host_fragment, fragment)
-            .replace(R.id.relativeLayout, fragment)
+            .replace(R.id.frame_layout, fragment)
             .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
             .commit()
 
@@ -220,9 +221,37 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     override fun onNavigationItemSelected(item:MenuItem):Boolean {
 
 
-        displayScreen(item.itemId)
+//        displayScreen(item.itemId)
+//
+//        drawer_layout.closeDrawer(GravityCompat.START)
+
+
+        when (item.itemId) {
+
+            R.id.categories -> {
+
+                categoriessFragment = CategoriessFragment()
+                supportFragmentManager
+                    .beginTransaction()
+                    .replace(R.id.frame_layout, categoriessFragment)
+                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                    .commit()
+            }
+
+            R.id.anotherFragment -> {
+
+                anotherFragment = AnotherFragment()
+                supportFragmentManager
+                    .beginTransaction()
+                    .replace(R.id.frame_layout, anotherFragment)
+                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                    .commit()
+            }
+        }
 
         drawer_layout.closeDrawer(GravityCompat.START)
+
+
 
         return true
 

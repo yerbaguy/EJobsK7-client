@@ -8,7 +8,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ebartmedia.ejobsk7.R
 import kotlinx.android.synthetic.main.animal_list_item.view.*
 
-class AnimalAdapter(val items : ArrayList<String>, val context: Context) : RecyclerView.Adapter<ViewHolder>() {
+//class AnimalAdapter(val items : ArrayList<String>, val context: Context) : RecyclerView.Adapter<ViewHolder>() {
+    class AnimalAdapter(val items : ArrayList<String>) : RecyclerView.Adapter<ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
 
         val view = LayoutInflater.from(parent?.context).inflate(R.layout.animal_list_item, parent, false)
